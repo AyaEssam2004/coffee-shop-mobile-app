@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_project/screens/home.dart';
 
 class MainScreen extends StatefulWidget {
-  static String id = "MainScreen";
+  static String id = "mainscreen";
   const MainScreen({super.key});
 
   @override
@@ -12,7 +12,6 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
-  /// **List of Screens (Pages)**
   final List<Widget> _screens = [
     Home(),
     Center(child: Text("Favorites Page", style: TextStyle(fontSize: 22))),
