@@ -11,10 +11,12 @@ class CategorySelector extends StatefulWidget {
   });
 
   @override
-  _CategorySelectorState createState() => _CategorySelectorState();
+  CategorySelectorState createState() =>
+      CategorySelectorState(); // ✅ Rename here
 }
 
-class _CategorySelectorState extends State<CategorySelector> {
+class CategorySelectorState extends State<CategorySelector> {
+  // ✅ Remove underscore
   String selectedCategory = "All Coffee"; // Default selected category
 
   @override

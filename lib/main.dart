@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'screens/home.dart'; // Import Home screen
-import 'screens/detail.dart'; // Import Detail screen
+import 'package:my_project/custom_widgets/main_screen.dart';
+import 'package:my_project/screens/login';
+import 'screens/home.dart';
+import 'screens/detail.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,10 +15,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: Home.id,
+      initialRoute: MainScreen.id,
       routes: {
+        MainScreen.id: (context) => const MainScreen(),
         Home.id: (context) => Home(),
-        Detail.id: (context) => const Detail(),
+        LoginScreen.id: (context) => LoginScreen(),
+      },
+      onGenerateRoute: (settings) {
+        if (settings.name == Detail.id) {
+          final coffeeItem = settings.arguments as Map<String, dynamic>;
+          return MaterialPageRoute(
+            builder: (context) => Detail(coffeeItem: coffeeItem),
+          );
+        }
+        return null; // If route not found, return null
       },
     );
   }
