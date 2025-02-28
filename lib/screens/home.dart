@@ -1,8 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:my_project/custom_widgets/category_selector.dart';
+import 'package:my_project/custom_widgets/coffee_grid.dart';
 
 class Home extends StatelessWidget {
-  const Home({super.key});
+  Home({super.key});
+
   static String id = "HomeScreen";
+  final List<String> categories = [
+    "All Coffee",
+    "Macchiato",
+    "Latte",
+    "Americano",
+    "Espresso",
+    "Mocha"
+  ];
+
+  final List<Map<String, dynamic>> coffeeItems = [
+    {
+      "name": "Caffe Mocha",
+      "subTitle": "Deep Foam",
+      "price": 4.53,
+      "image": "assets/images/1.jpeg",
+      "rating": 4.8,
+    },
+    {
+      "name": "Flat White",
+      "subTitle": "Espresso",
+      "price": 3.53,
+      "image": "assets/images/2.jpeg",
+      "rating": 4.8,
+    },
+    {
+      "name": "Latte",
+      "subTitle": "Steamed Milk",
+      "price": 4.00,
+      "image": "assets/images/3.jpeg",
+      "rating": 4.5,
+    },
+    {
+      "name": "Americano",
+      "subTitle": "Rich Espresso",
+      "price": 2.99,
+      "image": "assets/images/4.png",
+      "rating": 4.3,
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +74,7 @@ class Home extends StatelessWidget {
               Expanded(
                 child: Container(
                   width: double.infinity,
-                  color: const Color.fromARGB(255, 255, 255, 255),
+                  color: const Color.fromARGB(255, 239, 239, 239),
                 ),
               ),
             ],
@@ -121,13 +163,33 @@ class Home extends StatelessWidget {
 
           // Promo Image (floating over both sections)
           Positioned(
-            top: 220, // Adjust this to move the image up/down
+            top: 220,
             left: 20,
             right: 20,
             child: Image.asset(
               'assets/images/4.png',
               width: MediaQuery.of(context).size.width * 0.9,
               fit: BoxFit.contain,
+            ),
+          ),
+          Positioned(
+            top: 395, // Adjust position as needed
+            left: 0,
+            right: 0,
+            child: CategorySelector(
+              categories: categories,
+              onCategorySelected: (selectedCategory) {
+                print("Selected Category: $selectedCategory");
+              },
+            ),
+          ),
+          Positioned(
+            top: 450,
+            left: 0,
+            right: 0,
+            bottom: 70,
+            child: SingleChildScrollView(
+              child: CoffeeGrid(coffeeItems: coffeeItems),
             ),
           ),
         ],
