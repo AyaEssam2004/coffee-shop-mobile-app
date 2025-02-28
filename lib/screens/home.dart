@@ -7,15 +7,16 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Column(
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+      body: Stack(
         children: [
-          Stack(
+          // Background sections
+          Column(
             children: [
-              // Background gradient
+              // Dark background
               Container(
+                height: 300,
                 width: double.infinity,
-                height: 327,
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topRight,
@@ -27,12 +28,24 @@ class Home extends StatelessWidget {
                   ),
                 ),
               ),
+              // White section (for coffee list)
+              Expanded(
+                child: Container(
+                  width: double.infinity,
+                  color: const Color.fromARGB(255, 255, 255, 255),
+                ),
+              ),
+            ],
+          ),
 
-              // "Location" text
-              Positioned(
-                top: 80,
-                left: 20,
-                child: Text(
+          // Texts and Search Bar
+          Positioned(
+            top: 80,
+            left: 20,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
                   'Location',
                   style: TextStyle(
                     color: Color.fromARGB(179, 132, 132, 132),
@@ -40,18 +53,13 @@ class Home extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
-
-              // "Bilzen, Tanjungbalai" text with a dropdown arrow
-              Positioned(
-                top: 110,
-                left: 20,
-                child: Row(
+                const SizedBox(height: 5),
+                Row(
                   children: [
                     Text(
                       'Bilzen, Tanjungbalai',
                       style: TextStyle(
-                        color: Color.fromARGB(172, 255, 255, 255),
+                        color: Colors.white,
                         fontSize: 17,
                         fontWeight: FontWeight.bold,
                       ),
@@ -59,69 +67,68 @@ class Home extends StatelessWidget {
                     const SizedBox(width: 5),
                     const Icon(
                       Icons.keyboard_arrow_down,
-                      color: Color.fromARGB(172, 255, 255, 255),
+                      color: Colors.white,
                       size: 22,
                     ),
                   ],
                 ),
-              ),
+              ],
+            ),
+          ),
 
-              // Search bar and filter button
-              Positioned(
-                top: 160,
-                left: 20,
-                right: 20,
-                child: Row(
-                  children: [
-                    // Search bar
-                    Expanded(
-                      child: Container(
-                        height: 60,
-                        decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 47, 47, 47),
-                            borderRadius: BorderRadius.circular(12)),
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: 'Search coffee',
-                            hintStyle: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 16,
-                            ),
-                            prefixIcon:
-                                Icon(Icons.search, color: Colors.white70),
-                            contentPadding: EdgeInsets.symmetric(vertical: 10),
-                          ),
+          // Search Bar
+          Positioned(
+            top: 160,
+            left: 20,
+            right: 20,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 47, 47, 47),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Search coffee',
+                        border: InputBorder.none,
+                        hintStyle: TextStyle(
+                          color: Colors.white70,
+                          fontSize: 16,
                         ),
+                        prefixIcon: Icon(Icons.search, color: Colors.white70),
+                        contentPadding: EdgeInsets.symmetric(vertical: 10),
                       ),
                     ),
-                    const SizedBox(width: 20),
+                  ),
+                ),
+                const SizedBox(width: 20),
+                Container(
+                  height: 50,
+                  width: 50,
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFC67C4E),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Icon(Icons.tune, color: Colors.white),
+                ),
+              ],
+            ),
+          ),
 
-                    // Filter button
-                    Container(
-                      height: 60,
-                      width: 60,
-                      padding: EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFC67C4E),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Icon(Icons.tune, color: Colors.white),
-                    ),
-                  ],
-                ),
-              ),
-              Positioned(
-                top: 230,
-                left: 20,
-                right: 20,
-                child: Image.asset(
-                  'assets/images/4.png',
-                  //width: MediaQuery.of(context).size.width *
-                  //0.9, // Adjusts width dynamically
-                  // fit: BoxFit.contain,
-                ),
-              ),
-            ],
+          // Promo Image (floating over both sections)
+          Positioned(
+            top: 220, // Adjust this to move the image up/down
+            left: 20,
+            right: 20,
+            child: Image.asset(
+              'assets/images/4.png',
+              width: MediaQuery.of(context).size.width * 0.9,
+              fit: BoxFit.contain,
+            ),
           ),
         ],
       ),
